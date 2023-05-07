@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
 export default function Registre() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,8 +15,8 @@ export default function Registre() {
   const myData: MyData = { emails: email, passwords: password };
 
   let Submit = () => {
-    router.push("/chat");
     localStorage.setItem("user", JSON.stringify(myData));
+    router.push("/chat");
   };
 
   return (
@@ -34,13 +33,7 @@ export default function Registre() {
 
             <Form.Group className="mb-3">
               <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Last name"
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
+              <Form.Control type="text" placeholder="Last name" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
