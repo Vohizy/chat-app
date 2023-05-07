@@ -8,12 +8,16 @@ export default function Registre() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const router = useRouter();
+  interface MyData {
+    emails: string;
+    passwords: string;
+  }
+  const myData: MyData = { emails: email, passwords: password };
+
   let Submit = () => {
-    const router = useRouter();
     router.push("/chat");
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("password", password);
+    localStorage.setItem("user", JSON.stringify(myData));
   };
 
   return (
