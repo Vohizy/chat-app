@@ -6,10 +6,10 @@ import { useRouter } from "next/router";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   let Submit = () => {
-    router.push("chat");
+    const router = useRouter();
+    router.push("/chat");
     localStorage.setItem("email", email);
     localStorage.setItem("password", password);
   };

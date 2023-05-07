@@ -7,9 +7,9 @@ export default function Registre() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   let Submit = () => {
+    const router = useRouter();
     router.push("/chat");
     localStorage.setItem("name", name);
     localStorage.setItem("email", email);
