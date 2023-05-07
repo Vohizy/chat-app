@@ -6,12 +6,20 @@ import { useRouter } from "next/router";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const router = useRouter();
   let Submit = () => {
-    const router = useRouter();
-    router.push("/chat");
-    localStorage.setItem("email", email);
-    localStorage.setItem("password", password);
+    if (typeof localStorage !== "undefined") {
+      const myValue = localStorage.getItem("user");
+
+      if (myValue) {
+        const myParsValue = JSON.parse(myValue);
+        if (myParsValue.emails == email && myParsValue.passwords == password) {
+          router.push("/chat");
+        } else {
+          alert("your password is incorect or your mail");
+        }
+      }
+    }
   };
 
   return (
