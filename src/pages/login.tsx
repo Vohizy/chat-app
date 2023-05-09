@@ -7,7 +7,8 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  let Submit = () => {
+  let Submit = (e: any) => {
+    e.preventDefault();
     if (typeof localStorage !== "undefined") {
       const myValue = localStorage.getItem("user");
 
