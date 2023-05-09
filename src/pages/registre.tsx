@@ -14,7 +14,8 @@ export default function Registre() {
   }
   const myData: MyData = { emails: email, passwords: password };
 
-  let Submit = () => {
+  let Submit = (e: any) => {
+    e.preventDefault();
     localStorage.setItem("user", JSON.stringify(myData));
     router.push("/chat");
   };
