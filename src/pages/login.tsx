@@ -25,7 +25,6 @@ export default function LoginPage() {
         const myParsValue = JSON.parse(myValue);
         if (myParsValue.emails == data.email && myParsValue.passwords == data.password) {
           router.push("/chat")
-          console.log(router)
         } else {
           alert("your password is incorect or your mail");
         }
