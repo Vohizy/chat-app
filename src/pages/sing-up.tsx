@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import {useForm} from "react-hook-form";
 import * as yup from "yup"
-export default function Registre() {
+export default function SingUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const {register, handleSubmit, formState: { errors } } = useForm()
