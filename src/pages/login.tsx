@@ -2,6 +2,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import style from "@/styles/Style.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -9,20 +10,22 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const {register, handleSubmit, formState: { errors }} =useForm();
   const schema = yup.object().shape({
     email:yup.string().email().required(),
     password: yup.string().min(6).max(15).required(),
   })
-  let Submit = (e: any) => {
-    e.preventDefault();
+  const {register, handleSubmit, formState: { errors }} =useForm({
+    resolver:yupResolver(schema)
+  });
+  let submitForm = (data: any) => {
     if (typeof localStorage !== "undefined") {
       const myValue = localStorage.getItem("user");
 
       if (myValue) {
         const myParsValue = JSON.parse(myValue);
-        if (myParsValue.emails == email && myParsValue.passwords == password) {
-          router.push("/chat");
+        if (myParsValue.emails == data.email && myParsValue.passwords == data.password) {
+          router.push("/chat")
+          console.log(router)
         } else {
           alert("your password is incorect or your mail");
         }
@@ -30,10 +33,8 @@ export default function LoginPage() {
     }
   };
 
-  const submitForm = (data:any) =>{
-    console.log(data)
-  }
-
+  // @ts-ignore
+  // @ts-ignore
   return (
     <>
       <Container className="d-flex justify-content-center p-4">
@@ -45,12 +46,11 @@ export default function LoginPage() {
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
-                name="email"
                 placeholder="Enter email"
+                {...register("email")}
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                ref={register}
               />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
@@ -61,18 +61,17 @@ export default function LoginPage() {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
-                name = "password"
                 placeholder="Password"
+                {...register("password")}
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-                ref={register}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={Submit}>
+            <Button variant="primary" type="submit">
               Submit
             </Button>
           </Form>

@@ -27,8 +27,8 @@ export default function SingUp() {
     localStorage.setItem("user", JSON.stringify(myData));
     router.push("/chat");
   };
-const submitForm = () =>{
-
+const submitForm = (data:any) =>{
+  console.log(data)
 }
   return (
     <>
