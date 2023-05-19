@@ -8,6 +8,8 @@ import * as yup from "yup"
 export default function SingUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmed, setPasswordConfirmed] = useState("");
+  const[error,setError]=useState(false);
   const {register, handleSubmit, formState: { errors } } = useForm()
 
   const router = useRouter();
@@ -22,14 +24,15 @@ export default function SingUp() {
    email: yup.string().email().required(),
    password: yup.string().min(6).max(15).required()
  })
-  let Submit = (e: any) => {
-    e.preventDefault();
+  let submitForm = (data: any) => {
     localStorage.setItem("user", JSON.stringify(myData));
-    router.push("/chat");
+    if(passwordConfirmed===password){
+      router.push("/chat");
+    }
+    else{
+      setError(true)
+    }
   };
-const submitForm = (data:any) =>{
-  console.log(data)
-}
   return (
     <>
       <Container className="d-flex justify-content-center p-4">
@@ -73,10 +76,24 @@ const submitForm = (data:any) =>{
                 }}
               />
             </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password confirmed</Form.Label>
+              <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  name="Password"
+                  onChange={(e) => {
+                    setPasswordConfirmed(e.target.value);
+                  }}
+              />
+              {error&&<p className="text-danger">your password is invalid</p>}
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={Submit}>
+            <Button variant="primary" type="submit">
               Submit
             </Button>
           </Form>
