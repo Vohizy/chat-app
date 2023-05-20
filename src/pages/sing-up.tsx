@@ -7,6 +7,7 @@ import {useForm} from "react-hook-form";
 import * as yup from "yup"
 export default function SingUp() {
   const [email, setEmail] = useState("");
+  const [bio, setBio] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmed, setPasswordConfirmed] = useState("");
   const[error,setError]=useState(false);
@@ -35,22 +36,22 @@ export default function SingUp() {
   };
   return (
     <>
-      <Container className="d-flex justify-content-center p-4">
+      <Container className="d-flex justify-content-center p-2">
         <div
-          className={`${style.container_form} d-flex align-items-center justify-content-center $purple-400`}
-        >
-          <Form onSubmit={handleSubmit(submitForm)}>
-            <Form.Group className="mb-3">
+          className={`${style.container_form} d-flex align-items-center justify-content-center `}
+        ><Form onSubmit={handleSubmit(submitForm)}>
+          <div className="d-flex">
+            <Form.Group className="mb-3 px-2">
               <Form.Label>First Name</Form.Label>
               <Form.Control type="text" placeholder="First name" name="firstName" />
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 px-2">
               <Form.Label>Last Name</Form.Label>
               <Form.Control type="text" placeholder="Last name" name="lastName" />
-            </Form.Group>
+            </Form.Group></div>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3 px-5" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
@@ -65,7 +66,20 @@ export default function SingUp() {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3 px-5" controlId="formBasicEmail">
+              <Form.Label>Bio</Form.Label>
+              <Form.Control
+                  type="text"
+                  placeholder="Enter bio"
+                  name="bio"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+              />
+            </Form.Group>
+
+          <div className="d-flex">
+            <Form.Group className="mb-3 px-2" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
@@ -77,7 +91,7 @@ export default function SingUp() {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3 px-2" controlId="formBasicPassword">
               <Form.Label>Password confirmed</Form.Label>
               <Form.Control
                   type="password"
@@ -89,6 +103,7 @@ export default function SingUp() {
               />
               {error&&<p className="text-danger">your password is invalid</p>}
             </Form.Group>
+          </div>
 
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Check me out" />
