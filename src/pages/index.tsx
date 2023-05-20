@@ -14,7 +14,10 @@ export default function Home() {
     if(typeof localStorage!=="undefined"){
         const myvalue = localStorage.getItem("user")
         if(myvalue){
-            router.push("/chat")
+            const myParsValue = JSON.parse(myvalue);
+            if (myParsValue.emails !== "" && myParsValue.passwords !== "") {
+                router.push("/chat")
+            }
         }
         else {
             router.push("/sing-up")

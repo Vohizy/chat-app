@@ -66,14 +66,14 @@ export default function SingUp() {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-3 px-5" controlId="formBasicEmail">
+            <Form.Group className="mb-3 px-5" >
               <Form.Label>Bio</Form.Label>
               <Form.Control
                   type="text"
                   placeholder="Enter bio"
                   name="bio"
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    setBio(e.target.value);
                   }}
               />
             </Form.Group>
