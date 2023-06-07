@@ -46,7 +46,7 @@ export default function SingUp() {
         password,
       });
       localStorage.setItem("user", data);
-      router.push("/chat");
+      router.push("/profile");
     } else {
       setError(true);
     }
