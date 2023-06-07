@@ -59,28 +59,17 @@ export default function SingUp() {
           className={`${style.container_form} d-flex align-items-center justify-content-center `}
         >
           <Form onSubmit={handleSubmit(submitForm)}>
-            <div className="d-flex">
-              <Form.Group className="mb-3 px-2">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="First name"
-                  {...register("firstName")}
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3 px-2">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Last name"
-                  {...register("lastName")}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                />
-              </Form.Group>
-            </div>
+            <Form.Group className="mb-3 px-5">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="First name"
+                {...register("firstName")}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+            </Form.Group>
 
             <Form.Group className="mb-3 px-5" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -138,10 +127,12 @@ export default function SingUp() {
               </Form.Group>
             </div>
 
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <Button variant="primary" type="submit" onClick={submitForm}>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={submitForm}
+              className="m-3"
+            >
               Submit
             </Button>
           </Form>
