@@ -1,5 +1,24 @@
 import { InstanceAxiosUrl } from "@/conf/axios";
-import { Auth } from "./user";
+import { Auth, User } from "./user";
+import { boolean } from "yup";
+
+export type owner = Pick<User, "name" | "email"> & {
+  id: number;
+};
+export type responsChannelType = {
+  status: boolean;
+  channels: channel[];
+};
+
+export type channel = {
+  name: string;
+  type: string;
+  createdAt: Date;
+  updatedAt: Date;
+  ownerId: number;
+  owner: owner;
+};
+
 export const createChannel = async (token: string) => {
   return await InstanceAxiosUrl.post("/channel", Auth(token)).then(
     (res) => res.data
