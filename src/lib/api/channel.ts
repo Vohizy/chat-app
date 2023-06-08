@@ -20,7 +20,7 @@ export type channel = {
 };
 
 export const createChannel = async (token: string) => {
-  return await InstanceAxiosUrl.post("/channel", Auth(token)).then(
+  return await InstanceAxiosUrl.post<channel>("/channel", Auth(token)).then(
     (res) => res.data
   );
 };
@@ -33,13 +33,15 @@ export const addMemberToChannel = async (token: string, channelId: number) => {
 };
 
 export const getChannel = async (token: string) => {
-  return await InstanceAxiosUrl.get("/channels", Auth(token)).then(
-    (res) => res.data
-  );
+  return await InstanceAxiosUrl.get<responsChannelType>(
+    "/channels",
+    Auth(token)
+  ).then((res) => res.data);
 };
 
 export const getChannelById = async (token: string, channelId: number) => {
-  return await InstanceAxiosUrl.get(`/channel/${channelId}`, Auth(token)).then(
-    (res) => res.data
-  );
+  return await InstanceAxiosUrl.get<channel>(
+    `/channel/${channelId}`,
+    Auth(token)
+  ).then((res) => res.data);
 };
