@@ -29,9 +29,14 @@ export const createChannel = async (token: string, reqBody: reqBodyChannel) => {
   ).then((res) => res.data);
 };
 
-export const addMemberToChannel = async (token: string, channelId: number) => {
+export const addMemberToChannel = async (
+  token: string,
+  channelId: number,
+  reqBody: number[]
+) => {
   return await InstanceAxiosUrl.post(
     `/channels/${channelId}/members`,
+    reqBody,
     Auth(token)
   ).then((res) => res.data);
 };
