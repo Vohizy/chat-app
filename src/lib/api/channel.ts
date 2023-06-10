@@ -1,6 +1,5 @@
 import { InstanceAxiosUrl } from "@/conf/axios";
 import { Auth, User } from "./user";
-import { boolean } from "yup";
 
 export type owner = Pick<User, "name" | "email"> & {
   id: number;
@@ -18,11 +17,16 @@ export type channel = {
   ownerId: number;
   owner: owner;
 };
+export type reqBodyChannel = Pick<channel, "name" | "type"> & {
+  member: number;
+};
 
-export const createChannel = async (token: string) => {
-  return await InstanceAxiosUrl.post<channel>("/channel", Auth(token)).then(
-    (res) => res.data
-  );
+export const createChannel = async (token: string, reqBody: reqBodyChannel) => {
+  return await InstanceAxiosUrl.post<channel>(
+    "/channel",
+    reqBody,
+    Auth(token)
+  ).then((res) => res.data);
 };
 
 export const addMemberToChannel = async (token: string, channelId: number) => {
