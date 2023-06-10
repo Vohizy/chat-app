@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { createUsers } from "@/lib/api/user";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { cookies } from "next/dist/client/components/headers";
+import { useCookies } from "react-cookie";
 
 export default function SingUp() {
   const [email, setEmail] = useState("");
@@ -17,6 +17,7 @@ export default function SingUp() {
   const [passwordConfirmed, setPasswordConfirmed] = useState("");
   const [error, setError] = useState(false);
   const [datas, setData] = useState();
+  const [cookies, setCookie, removeCookie] = useCookies();
 
   const router = useRouter();
   const schema = yup.object().shape({
@@ -42,9 +43,9 @@ export default function SingUp() {
       bio,
     });
 
-    localStorage.setItem("token", datas.user.token);
-
     if (passwordConfirmed === password) {
+      setCookie("user-token", datas.user.token, { path: "/" });
+      setCookie("user-id", datas.user.id, { path: "/" });
       const data = JSON.stringify({
         email,
         password,

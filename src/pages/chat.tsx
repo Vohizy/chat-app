@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "@/styles/Style.module.css";
+import style from "@/styles/Style.module.css";
 import { useRouter } from "next/router";
 export default function Chat() {
   const [name, setName] = useState("");
@@ -23,21 +23,25 @@ export default function Chat() {
   }, []);
   return (
     <>
-      <Container className="p-2">
-        <nav className="nav bg-light d-flex justify-content-between">
-          <a
-            className="nav-link active d-flex justify-content-between"
-            aria-current="page"
-            href="#"
-          >
-            Welcome {name}
-          </a>
-          <Button variant="secondary" className="mx-2" onClick={signOut}>
-            Sign out
-          </Button>
-          {""}
-        </nav>
-        <div className="chat"></div>
+      <Container className="d-flex">
+        <div className={style.side_bar}></div>
+
+        <Container className="p-2">
+          <nav className="nav bg-light d-flex justify-content-between">
+            <a
+              className="nav-link active d-flex justify-content-between"
+              aria-current="page"
+              href="#"
+            >
+              Welcome {name}
+            </a>
+            <Button variant="secondary" className="mx-2" onClick={signOut}>
+              Sign out
+            </Button>
+            {""}
+          </nav>
+          <div className="chat"></div>
+        </Container>
       </Container>
     </>
   );
